@@ -8,5 +8,5 @@ Autorzy:
 Norbert Kosierkiewicz 116897, 
 Adam Mazurkiewicz 116913
 
-Informatyka stosowana ST,
+Informatyka stosowana (Stacjonarnie),
 Semestr VI
