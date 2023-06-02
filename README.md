@@ -1,12 +1,12 @@
 # PAI_SEM6_BIBLIOTEKA
-Przedmiot:
-Programowanie aplikacji internetowych
+Przedmiot:<br />
+Programowanie aplikacji internetowych<br />
 
-Temat: Aplikacja do obsługi biblioteki
-Strona internetowa: kosiera.pl/pai
-Autorzy: 
-Norbert Kosierkiewicz 116897, 
-Adam Mazurkiewicz 116913
+Temat: Aplikacja do obsługi biblioteki <br />
+Strona internetowa: kosiera.pl/pai <br />
+Autorzy: <br />
+Norbert Kosierkiewicz 116897, <br />
+Adam Mazurkiewicz 116913<br />
 
-Informatyka stosowana (Stacjonarnie),
-Semestr VI
+Informatyka stosowana (Stacjonarnie),<br />
+Semestr VI<br />
