@@ -33,6 +33,7 @@ function wrongTimes()
 
 $user = htmlentities($_POST["user"], ENT_QUOTES, "UTF-8");
 $pass = htmlentities($_POST["pass"], ENT_QUOTES, "UTF-8");
+    $dbhost = "localhost";
     $dbuser = "kosierap_pai";
     $dbpassword = "Pai321";
     $dbname = "kosierap_pai";
@@ -60,10 +61,13 @@ if (!$rekord) {
         session_start(); //Rozpoczecie sesji
         $_SESSION["loggedin"] = true;
         $_SESSION["user"] = $user;
-       $_SESSION["user_id"] = $rekord["student_id"];
+       $_SESSION["user_id"] = $rekord["id"];
+       $_SESSION["access"] = $rekord["access"];
         echo "Logowanie Ok. User: {$rekord["username"]}. Hasło: {$rekord["password"]}";
         apcu_delete($klucz_apcu); //Usuwa klucz APCu przez co bedzie mozliwe ponowne logowanie
-        header("Location: index2.php"); //Przejdz dalej do index4.php
+      if($rekord["access"] == "user")  header("Location: index2.php");
+      else if($rekord["access"] == "pracownik" || $rekord["access"] == "admin")  header("Location: index2_pracownik.php");
+       
     } else {
         wrongPassword();
         apcu_inc($klucz_apcu, 1, $fail, 60); //Dodaj do licznika przez 60s

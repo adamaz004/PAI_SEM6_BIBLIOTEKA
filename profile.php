@@ -234,14 +234,22 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
           
          </div></div>
        
-        <li><a href="index2.php"><img style="max-height:20px; padding-right:10px" src="media/panel.png">PANEL</a></li>
+       <?php if($_SESSION["access"]!= "user") {
+  echo "<li><a href='index2_pracownik.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
+} else { 
+  echo "<li><a href='index2.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
+  }
+       ?>
         <li><a href="profile.php"><img style="max-height:20px; padding-right:10px" src="media/user2.png">Profil</a></li>
-        <li><a href="terms.php"><img style="max-height:20px; padding-right:10px" src="media/calendar.png">Terminy</a></li>
-        <li><a href="grades.php"><img style="max-height:20px; padding-right:10px" src="media/score.png">Oceny</a></li>
-        <li style="background-color:gray"><a href="stats.php" style="pointer-events: none"><img style="max-height:20px; padding-right:10px" src="media/bar-graph.png">Statystyki</a></li>
-        <li><a href="subject.php"><img style="max-height:20px; padding-right:10px" src="media/reading-book.png">Przedmioty</a></li>
-        <li><a href="plan.php"><img style="max-height:20px; padding-right:10px" src="media/calendar2.png">Plan zajęć</a></li>
-        <li><a href="comments.php"><img style="max-height:20px; padding-right:10px" src="media/warning.png">Uwagi</a></li>
+              <?php if($_SESSION["access"]!= "user") {
+  echo "<li><a href='library/book_add.php'><img style='max-height:20px; padding-right:10px' src='media/download.png'>Dodawanie</a></li>";
+} else { 
+  echo "<li><a href='library/rent.php'><img style='max-height:20px; padding-right:10px' src='media/download.png'>Wypożyczenia</a></li>";
+  }
+       ?>
+        <li><a href="library/books.php"><img style="max-height:20px; padding-right:10px" src="media/bookshelf.png">Baza książek</a></li>
+        <li><a href="library/ebooks.php"><img style="max-height:20px; padding-right:10px" src="media/ebook.png">Ebooki</a></li>
+       <?php if($_SESSION["access"]!="user") echo '<li><a href="library/actions.php"><img style="max-height:20px; padding-right:10px" src="media/management.png">Zarządzanie</a></li>'; ?>
         <li><a href="contact.php"><img style="max-height:20px; padding-right:10px" src="media/mail.png">Kontakt</a></li>
       </ul>
   </nav>
@@ -264,9 +272,9 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
         <div class="div-header">
             <div class="container-header">
                 <div class="container-header-header">
-                    Uczeń <!-- Miejsce na rolę osoby (uczen/nauczyciel/opiekun) -->
+                    Użytkownik <!-- Miejsce na rolę osoby (uczen/nauczyciel/opiekun) -->
                 </div>
-                uczen@gmail.com <!-- Miejsce na nazwę osoby -->
+               <?php echo $_SESSION["user"]?>
             </div>
             <div class="container-avatar">
                 <img id="imagePreview" src="media/user.png"/><!-- Miejsce na avatar osoby -->
@@ -278,14 +286,13 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
               <?php
                $_SESSION["user_id"];
 $dbhost = "localhost";
-    $dbuser = "kosierap_ick";
-    $dbpassword = "Ick321!";
-    $dbname = "kosierap_ick";
+    $dbuser = "kosierap_pai";
+    $dbpassword = "Pai321";
+    $dbname = "kosierap_pai";
     $polaczenie = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
            mysqli_query($polaczenie, "SET NAMES 'utf8'");
-    $rezultat = mysqli_query($polaczenie, "SELECT * from student
-    join user on student.student_id = user.student_id
-    where student.student_id=".$_SESSION["user_id"]."");
+    $rezultat = mysqli_query($polaczenie, "SELECT * from user
+    where user.id=".$_SESSION["user_id"]."");
     echo "<table>";
 
     while ($wiersz = mysqli_fetch_array($rezultat)) {
@@ -294,57 +301,57 @@ $dbhost = "localhost";
        <tr>
                         <td>Imię</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[1]</div>
-                            <div class='toggle-element hidden'><input name='name' type='text' value='$wiersz[1]'></div>
+                            <div class='toggle-element visible'>$wiersz[4]</div>
+                            <div class='toggle-element hidden'><input name='name' type='text' value='$wiersz[4]'></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Nazwisko</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[2]</div>
-                            <div class='toggle-element hidden'><input name='surname' type='text' value='$wiersz[2]'></div>
+                            <div class='toggle-element visible'>$wiersz[5]</div>
+                            <div class='toggle-element hidden'><input name='surname' type='text' value='$wiersz[5]'></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Hasło</td>
                         <td>
                             <div class='toggle-element visible'>••••••••••••</div>
-                            <div class='toggle-element hidden'><input name='password' type='password' value='$wiersz[15]'></div>
+                            <div class='toggle-element hidden'><input name='password' type='password' value='$wiersz[2]'></div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>Numer telefonu</td>
+                        <td>
+                            <div class='toggle-element visible'>$wiersz[9]</div>
+                            <div class='toggle-element hidden'><input name='t_number' type='text' value='$wiersz[9]'></div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Nr legitymacji</td>
+                        <td>Nr karty biblitecznej</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[7]</div>
-                            <div class='toggle-element hidden'><input name='idnumber' type='text' value='$wiersz[7]'></div>
+                            <div class='toggle-element visible'>$wiersz[10]</div>
+                            <div class='toggle-element hidden'><input name='idnumber' type='text' value='$wiersz[10]' disabled></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Adres zamieszkania</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[8]</div>
-                            <div class='toggle-element hidden'><input name='address1' type='text' value='$wiersz[8]'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Nr lokalu</td>
-                        <td>
-                            <div class='toggle-element visible'>$wiersz[9]</div>
-                            <div class='toggle-element hidden'><input name='address2' type='text' value='$wiersz[9]'></div>
+                            <div class='toggle-element visible'>$wiersz[5]</div>
+                            <div class='toggle-element hidden'><input name='address1' type='text' value='$wiersz[5]'></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Kod pocztowy</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[10]</div>
-                            <div class='toggle-element hidden'><input name='code' type='text' value='$wiersz[10]'></div>
+                            <div class='toggle-element visible'>$wiersz[8]</div>
+                            <div class='toggle-element hidden'><input name='code' type='text' value='$wiersz[8]'></div>
                         </td>
                     </tr>
                     <tr>
                         <td>Miasto</td>
                         <td>
-                            <div class='toggle-element visible'>$wiersz[11]</div>
-                            <div class='toggle-element hidden'><input name='city' type='text' value='$wiersz[11]'></div>
+                            <div class='toggle-element visible'>$wiersz[7]</div>
+                            <div class='toggle-element hidden'><input name='city' type='text' value='$wiersz[7]'></div>
                         </td>
                     </tr>
       

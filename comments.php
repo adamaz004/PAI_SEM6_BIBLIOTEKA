@@ -81,14 +81,22 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
           
          </div></div>
        
-        <li><a href="index2.php"><img style="max-height:20px; padding-right:10px" src="media/panel.png">PANEL</a></li>
+       <?php if($_SESSION["access"]!= "user") {
+  echo "<li><a href='index2_pracownik.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
+} else { 
+  echo "<li><a href='index2.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
+  }
+       ?>
         <li><a href="profile.php"><img style="max-height:20px; padding-right:10px" src="media/user2.png">Profil</a></li>
-        <li><a href="terms.php"><img style="max-height:20px; padding-right:10px" src="media/calendar.png">Terminy</a></li>
-        <li><a href="grades.php"><img style="max-height:20px; padding-right:10px" src="media/score.png">Oceny</a></li>
-        <li style="background-color:gray"><a href="stats.php" style="pointer-events: none"><img style="max-height:20px; padding-right:10px" src="media/bar-graph.png">Statystyki</a></li>
-        <li><a href="subject.php"><img style="max-height:20px; padding-right:10px" src="media/reading-book.png">Przedmioty</a></li>
-        <li><a href="plan.php"><img style="max-height:20px; padding-right:10px" src="media/calendar2.png">Plan zajęć</a></li>
-        <li><a href="comments.php"><img style="max-height:20px; padding-right:10px" src="media/warning.png">Uwagi</a></li>
+              <?php if($_SESSION["access"]!= "user") {
+  echo "<li><a href='library/book_add.php'><img style='max-height:20px; padding-right:10px' src='media/download.png'>Dodawanie</a></li>";
+} else { 
+  echo "<li><a href='library/rent.php'><img style='max-height:20px; padding-right:10px' src='media/download.png'>Wypożyczenia</a></li>";
+  }
+       ?>
+        <li><a href="library/books.php"><img style="max-height:20px; padding-right:10px" src="media/bookshelf.png">Baza książek</a></li>
+        <li><a href="library/ebooks.php"><img style="max-height:20px; padding-right:10px" src="media/ebook.png">Ebooki</a></li>
+       <?php if($_SESSION["access"]!="user") echo '<li><a href="library/actions.php"><img style="max-height:20px; padding-right:10px" src="media/management.png">Zarządzanie</a></li>'; ?>
         <li><a href="contact.php"><img style="max-height:20px; padding-right:10px" src="media/mail.png">Kontakt</a></li>
       </ul>
   </nav>

@@ -191,16 +191,16 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
                 
                   <div class="divbutton" >
                         <div class="divbuttonhelper">
-                            <a href="library/rent.php"><!--Miejsce na przekierowanie-->
+                            <a href="library/book_add.php"><!--Miejsce na przekierowanie-->
                                 <div class="divimg">
                                     <img src="media/download.png"/>
                                 </div>
                                 <div class="divtext">
                                     <div class="divtexttext" >
                                         <div class="divtexttextheader" >
-                                           Wypożyczenia
+                                           Dodawanie
                                         </div>
-                                        Sprawdź swoje wypożyczone książki<br>i historię wypożyczeń
+                                        Dodaj nową książkę lub ebook
                                     </div>
                                 </div>
                             </a>
@@ -238,6 +238,25 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
                                             Ebooki
                                         </div>
                                         Sprawdź bazę ebooków
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                           
+                    <div class="divbutton">
+                        <div class="divbuttonhelper">
+                            <a href="library/actions.php"><!--Miejsce na przekierowanie-->
+                                <div class="divimg">
+                                    <img src="media/management.png"/>
+                                </div>
+                                <div class="divtext">
+                                    <div class="divtexttext">
+                                        <div class="divtexttextheader">
+                                            Zarządzanie
+                                        </div>
+                                        Zarządzaj książkami<br>i ebookami
                                     </div>
                                 </div>
                             </a>

@@ -42,7 +42,9 @@
                 <li class="nav-item text-center">
                   <a class="nav-link active btl" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
                 </li>
-               
+                <li class="nav-item text-center">
+                  <a class="nav-link btr" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Register</a>
+                </li>
                
               </ul>
               <div class="tab-content" id="pills-tabContent">
@@ -55,11 +57,11 @@
       <div class="alertInfo" id="alertInfo"><?php echo $_POST["info"]; ?></div>
       <br><br>
             <label for="floatingInput">Email address</label>
-      <input type="email" class="form-control" name="user" id="floatingInput" placeholder="name@example.com" value="uczen@gmail.com">
+      <input type="email" class="form-control" name="user" id="floatingInput" placeholder="name@example.com">
     </div>
     <div class="form-floating">
             <label for="floatingPassword">Password</label>
-      <input type="password" class="form-control" name="pass" id="floatingPassword" placeholder="Password" value="uczen">
+      <input type="password" class="form-control" name="pass" id="floatingPassword" placeholder="Password">
 
     </div>
 
@@ -73,7 +75,28 @@
                  
 
                   <div class="form px-4">
+<!-- REJESTRACJA -->
+                   <form method="post" action="add.php" enctype="multipart/form-data">
+    <div class="form-floating">
+            <label for="floatingInput">Email address</label>
+      <input type="email" class="form-control" name="user" id="floatingInputR" placeholder="name@example.com">
 
+    </div>
+    <div class="form-floating">
+            <label for="floatingPassword">Password</label>
+      <input type="password" class="form-control" name="pass" id="floatingPasswordR" placeholder="Password">
+
+    </div>
+    <div class="form-floating">
+            <label for="floatingPassword">Confirm password</label>
+      <input type="password" class="form-control" name="pass2" id="floatingPasswordR" placeholder="Confirm password">
+
+    </div>
+                     <!-- REJESTRACJA - submit -->
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit" onClick="return emptyRegister()">Register</button>
+                      <div id="alertRegister" style="color: red;"></div>
+  </form>
                   </div>
                 </div>
                </div>

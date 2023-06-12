@@ -255,6 +255,150 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
         .button-usun:active {
             transform: scale(0.98);
         }
+      .container-contact {
+            width: 570px;
+            height: 590px;
+            border: 3px solid black;
+            border-radius: 7px;
+            border-collapse: collapse;
+            background-color: #dddddd;
+        }
+      .klient {
+            width: 570px;
+            height: 590px;
+            border: 3px solid black;
+            border-radius: 7px;
+            border-collapse: collapse;
+            background-color: #dddddd;
+        }
+        .div-header {
+            width: 565px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: block;
+            border-collapse: collapse;
+            padding-bottom: 16px;
+            border-bottom: 3px solid black;
+        }
+      .zagadnienie {
+            width: 565px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: block;
+            border-collapse: collapse;
+            border-bottom: 3px solid black;
+        }
+        .container-header {
+            height: 130px;
+            width: 570px;
+            font-size: 24px;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            float: left;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        .container-header-header {
+            width: 570px;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container-data {
+            width: 570px;
+            height: 590px;
+            display: block;
+            border-collapse: collapse;
+        }
+        .div-contact-do {
+            border-collapse: collapse;
+            font-family: sans-serif;
+            width: 100%;
+            height: 24px;
+            font-size: 20px;
+            margin-top: 5px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+        .div-contact-do input {
+            width: 340px;
+            height: 24px;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        #message {
+            position: absolute;
+            margin: 5px;
+            width: 554px;
+            height: 395px;
+            margin-top: 16px;
+            text-align: left !important;
+            vertical-align: top !important;
+            
+            resize: none !important;
+            white-space: pre-wrap !important;
+            overflow-wrap: break-word !important;
+        }
+        .button-send{
+            padding-top: 16px;
+            padding-bottom: 16px;
+            width: 220px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: 3px solid black;
+            border-radius: 7px;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 20px;
+            margin-top: 450px;
+            margin-left: 175px;
+            font-weight: bold;
+            background-color: #12b32d;
+        }
+        .button-send:hover {
+            background-color: #27d644;
+            transition: 0.1s;
+            transform: scale(1.12);
+        }
+        .button-send:active {
+            transform: scale(0.98);
+        }
+              .button-answer{
+                float:left;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            width: 220px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: 3px solid black;
+            border-radius: 7px;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 20px;
+           
+            margin-left: 175px;
+            font-weight: bold;
+            background-color: #12b32d;
+        }
+        .button-answer:hover {
+            background-color: #27d644;
+            transition: 0.1s;
+            transform: scale(1.12);
+        }
+        .button-answer:active {
+            transform: scale(0.98);
+        }
+      .klient {
+       float:left; 
+      }
     </style>
     
 </head>
@@ -272,7 +416,7 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
           
          </div></div>
        
-       <?php if($_SESSION["access"]!= "user") {
+        <?php if($_SESSION["access"]!= "user") {
   echo "<li><a href='index2_pracownik.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
 } else { 
   echo "<li><a href='index2.php'><img style='max-height:20px; padding-right:10px' src='media/panel.png'>PANEL</a></li>";
@@ -289,8 +433,6 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
         <li><a href="library/ebooks.php"><img style="max-height:20px; padding-right:10px" src="media/ebook.png">Ebooki</a></li>
        <?php if($_SESSION["access"]!="user") echo '<li><a href="library/actions.php"><img style="max-height:20px; padding-right:10px" src="media/management.png">Zarządzanie</a></li>'; ?>
         <li><a href="contact.php"><img style="max-height:20px; padding-right:10px" src="media/mail.png">Kontakt</a></li>
-
-
       </ul>
   </nav>
         <!-- /#sidebar-wrapper -->
@@ -305,64 +447,63 @@ if (!isset($_SESSION['loggedin'])) //Jezeli nie ma sesji
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-       
+                		
+                      <?php 
+           $contact = $_GET["contact"];
+$dbhost = "localhost";
+    $dbuser = "kosierap_pai";
+    $dbpassword = "Pai321";
+    $dbname = "kosierap_pai";
+           
+    $polaczenie = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+    $rezultat = mysqli_query($polaczenie, "SELECT * from messages where messages_id=$contact");
+   
+    while ($wiersz = mysqli_fetch_array($rezultat)) {
+      
+      
+     echo "<div class='klient'><b><center><h3>Od: ".$wiersz[1]."</h3>
+     
+     <h3>Dnia: ".$wiersz[5]."</h3>
+     
+     </center></b>
+     <div class='zagadnienie'><center><h3>";
+
+      echo"Temat: $wiersz[3]</h3></center>
+      </div>
+     <h2><br> <textarea id='message' disabled>$wiersz[4]</textarea></h2>
+     
+     
+     </div>";
+           
+           echo "
+          
+           
+           
+           ";
+      
+      
+    }
+   
+    mysqli_close($polaczenie);
+?>
+    
+  
+           
+           
+           </div>
+    
                         
                         
-                        
-    <div class="container-contact">
-        <div class="div-header">
-            <div class="container-header">
-                <div class="container-header-header">
-                    Kontakt
-                </div>
-               <?php echo $_SESSION["user"] ?>
-            </div>
-        </div>
-        <div class="container-data">
-            <form method="post" action="contact_send.php">
-              
-                <div class="div-contact-do">
-  <?php
-               if($_SESSION["access"] != "user" ) echo "Wyślij wiadomość do: <input type='email' name='email'/> ";
-                      else echo "Wyślij wiadomość do: <input type='text' name='email' value='Pracownik' disabled/> ";
-                      ?>
-                </div>
                       
-                      
-              	<div class="div-contact-do">
-                    Temat: <input type="text" id="" name="topic"/>
-                </div>
-                <textarea id="message" type="text" name="message"></textarea>
-                <button class="button-send" type="submit">Wyślij</button>
-            </form>
-        </div>
-    </div>
-                        
-                        
-    					<div class="container-answers" id="container-answer"><!-- cały blok -->
-                          <!-- tutaj zaczyna się rekurencyjne przedstawienie -->
-                         
+                   
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-         
+        
     </div>
     <!-- /#wrapper -->
-     <script>
- $(document).ready(function() {
-			setInterval(function() {
-				$.ajax({
-					url: "contact_get.php",
-					success: function(result) {
-						$("#container-answer").html(result);
-					}
-				});
-			}, 1000); // odświeżaj co sekundę
-		});
- 
-      document.getElementById("volume-button").click();
-  </script>
+    
     
    
     
